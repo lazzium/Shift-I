@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Dynalight&family=Inclusive+Sans:ital,wght@0,300..700;1,300..700&family=Instrument+Serif:ital@0;1&family=Rethink+Sans:ital,wght@0,400..800;1,400..800&family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  --font-inclusive: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  --font-rethink: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  --font-serif: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  --font-dynalight: "Dynalight", cursive, Georgia, serif;
+  
+  --color-brand-light: #f0d8e8;
+  --color-brand-dark: #3f2a36;
+  --color-brand-text: #372130;
+  --color-brand-pink: #f89ecd;
+}
+
+@utility font-inclusive {
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+.font-inclusive {
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+@utility font-rethink {
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+.font-rethink {
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+@utility font-dynalight {
+  font-family: "Dynalight", cursive, Georgia, serif;
+}
+
+.font-dynalight {
+  font-family: "Dynalight", cursive, Georgia, serif;
+}
+
+@layer utilities {
+  .animate-marquee {
+    animation: marquee 40s linear infinite;
+  }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+html {
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari, Opera */
+  width: 0px;
+  height: 0px;
+  background: transparent;
+}
+
+body {
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  background-color: var(--color-brand-light);
+  color: var(--color-brand-text);
+  margin: 0;
+  padding: 0;
+  overflow-x: clip;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
