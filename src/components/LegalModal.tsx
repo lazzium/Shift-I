@@ -138,7 +138,10 @@ export const LegalModal: React.FC<LegalModalProps> = ({
             </div>
 
             {/* Content Body */}
-            <div className="px-6 sm:px-8 py-6 overflow-y-auto space-y-6 text-[#4a3249] text-[14px] leading-relaxed">
+            <div 
+              data-lenis-prevent="true"
+              className="px-6 sm:px-8 py-6 overflow-y-auto space-y-6 text-[#4a3249] text-[14px] leading-relaxed"
+            >
               {activeTab === 'privacy' && (
                 <div className="space-y-6">
                   <div>

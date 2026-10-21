@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ArrowLeft, ArrowRight, ArrowUp, Users, FileText, ShieldCheck, Eye, Menu, X, Plus } from 'lucide-react';
 import { motion, AnimatePresence, useScroll, useTransform, MotionValue } from 'framer-motion';
+import Lenis from 'lenis';
+import 'lenis/dist/lenis.css';
 import { Footer } from './components/Footer';
 import { LegalModal, LegalDocType } from './components/LegalModal';
 import ThomasLImg from '../assets/Section 1 : Lancez votre boutique e-commerce clé en main/Thomas L.jpg';
@@ -302,6 +304,7 @@ export default function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeLegalDoc, setActiveLegalDoc] = useState<LegalDocType | null>(null);
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const lenisRef = useRef<Lenis | null>(null);
   const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
   const storiesScrollRef = useRef<HTMLDivElement>(null);
   const statementRef = useRef<HTMLElement>(null);
@@ -309,6 +312,73 @@ export default function App() {
     target: statementRef,
     offset: ["start 85%", "center 45%"],
   });
+
+  // Initialize Lenis smooth scroll engine
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.25,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1.0,
+      touchMultiplier: 1.2,
+      infinite: false,
+    });
+
+    lenisRef.current = lenis;
+
+    let animId: number;
+    function raf(time: number) {
+      lenis.raf(time);
+      animId = requestAnimationFrame(raf);
+    }
+    animId = requestAnimationFrame(raf);
+
+    return () => {
+      cancelAnimationFrame(animId);
+      lenis.destroy();
+      lenisRef.current = null;
+    };
+  }, []);
+
+  // Pause / resume Lenis when modal opens or closes
+  useEffect(() => {
+    if (activeLegalDoc) {
+      lenisRef.current?.stop();
+    } else {
+      lenisRef.current?.start();
+    }
+  }, [activeLegalDoc]);
+
+  // Intercept anchor link clicks for fluid Lenis transitions
+  useEffect(() => {
+    const handleAnchorClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      const anchor = target?.closest('a');
+      if (!anchor) return;
+      const href = anchor.getAttribute('href');
+      if (href && href.startsWith('#') && href.length > 1) {
+        const targetElement = document.querySelector(href);
+        if (targetElement) {
+          e.preventDefault();
+          setIsMobileMenuOpen(false);
+          const offset = href === '#accueil' ? 0 : -90;
+          if (lenisRef.current) {
+            lenisRef.current.scrollTo(targetElement as HTMLElement, {
+              offset,
+              duration: 1.25,
+            });
+          } else {
+            targetElement.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      }
+    };
+
+    document.addEventListener('click', handleAnchorClick);
+    return () => document.removeEventListener('click', handleAnchorClick);
+  }, []);
 
   // Synchronize active step highlight with scroll position across the 3 step blocks
   useEffect(() => {
@@ -341,12 +411,16 @@ export default function App() {
     setActiveStep(index);
     const targetEl = stepRefs.current[index];
     if (targetEl) {
-      const navOffset = 110;
-      const elementPosition = targetEl.getBoundingClientRect().top + window.scrollY;
-      window.scrollTo({
-        top: elementPosition - navOffset,
-        behavior: 'smooth'
-      });
+      if (lenisRef.current) {
+        lenisRef.current.scrollTo(targetEl, { offset: -110, duration: 1.25 });
+      } else {
+        const navOffset = 110;
+        const elementPosition = targetEl.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({
+          top: elementPosition - navOffset,
+          behavior: 'smooth'
+        });
+      }
     }
   };
 
@@ -363,10 +437,14 @@ export default function App() {
   };
 
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
+    if (lenisRef.current) {
+      lenisRef.current.scrollTo(0, { duration: 1.25 });
+    } else {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
   };
 
   useEffect(() => {
@@ -1111,7 +1189,11 @@ export default function App() {
           <span className="font-dynalight font-normal text-[52px] md:text-[84px] text-[#d20090] tracking-normal">obtiennent</span> vraiment
         </h2>
 
-        <div ref={storiesScrollRef} className="flex overflow-x-auto gap-4 md:gap-[24px] px-6 md:px-[6vw] lg:px-[10vw] snap-x snap-mandatory pb-12 w-full hide-scrollbar">
+        <div 
+          ref={storiesScrollRef} 
+          data-lenis-prevent="true"
+          className="flex overflow-x-auto gap-4 md:gap-[24px] px-6 md:px-[6vw] lg:px-[10vw] snap-x snap-mandatory pb-12 w-full hide-scrollbar"
+        >
           {duplicatedStories.map((story, idx) => (
             <div key={idx} className="flex flex-col md:flex-row gap-[8px] shrink-0 snap-center md:snap-start">
               {/* Image Card */}
