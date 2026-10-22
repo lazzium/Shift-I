@@ -38,6 +38,8 @@ import KarimBImg6 from "../assets/Section 6 : Ce que nos clients obtiennent/Kari
 import SarahLImg6 from "../assets/Section 6 : Ce que nos clients obtiennent/Sarah L.jpg";
 import ThomasDImg6 from "../assets/Section 6 : Ce que nos clients obtiennent/Thomas D.jpg";
 
+const WHATSAPP_URL = "https://wa.me/2290151713934";
+
 const successStories = [
   {
     name: "Karim B.",
@@ -689,7 +691,7 @@ export default function App() {
 
           {/* Desktop CTA */}
           <a 
-            href="https://wa.me/message/SGQCQZA5J56EE1" 
+            href={WHATSAPP_URL} 
             target="_blank" 
             rel="noopener noreferrer"
             className="hidden lg:inline-block bg-brand-pink text-[#372130] px-10 py-4 rounded-[1.25rem] text-[15px] font-semibold hover:opacity-90 transition-opacity"
@@ -717,7 +719,7 @@ export default function App() {
               <a href="#faq" onClick={() => setIsMobileMenuOpen(false)} className="hover:opacity-60 transition-opacity">FAQ</a>
             </div>
             <a 
-              href="https://wa.me/message/SGQCQZA5J56EE1" 
+              href={WHATSAPP_URL} 
               target="_blank" 
               rel="noopener noreferrer"
               onClick={() => setIsMobileMenuOpen(false)}
@@ -749,7 +751,7 @@ export default function App() {
 
         <div className="flex flex-row flex-wrap items-center gap-4 w-full px-4 justify-center">
           <a 
-            href="https://wa.me/message/SGQCQZA5J56EE1" 
+            href={WHATSAPP_URL} 
             target="_blank" 
             rel="noopener noreferrer"
             className="w-auto bg-white text-brand-text pl-6 md:pl-10 pr-4 py-4 md:py-4 rounded-[1.25rem] text-[15px] font-semibold shadow-[0_2px_10px_0_rgba(0,0,0,0.05)] transition-all duration-300 flex items-center justify-between md:justify-start space-x-5"
@@ -1047,7 +1049,12 @@ export default function App() {
               <p className="font-sans text-[#2b1c20]/70 text-[16px] leading-relaxed mb-6 flex-grow">
                 Un site e-commerce premium, optimisé conversion : pages produit percutantes, tunnel de vente fluide, intégration des moyens de paiement, design mobile-first.
               </p>
-              <a href="#" className="w-max font-sans font-bold text-[15px] text-[#2b1c20] border-b-2 border-[#2b1c20] pb-0.5 hover:opacity-70 transition-opacity">
+              <a 
+                href={WHATSAPP_URL} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-max font-sans font-bold text-[15px] text-[#2b1c20] border-b-2 border-[#2b1c20] pb-0.5 hover:opacity-70 transition-opacity"
+              >
                 Voir le service
               </a>
             </motion.div>
@@ -1071,7 +1078,12 @@ export default function App() {
               <p className="font-sans text-[#2b1c20]/70 text-[16px] leading-relaxed mb-6 flex-grow">
                 Nous identifions les produits à fort potentiel grâce à notre méthode d'analyse data-driven. Fini les tests à l'aveugle — chaque produit est validé avant d'être lancé.
               </p>
-              <a href="#" className="w-max font-sans font-bold text-[15px] text-[#2b1c20] border-b-2 border-[#2b1c20] pb-0.5 hover:opacity-70 transition-opacity">
+              <a 
+                href={WHATSAPP_URL} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-max font-sans font-bold text-[15px] text-[#2b1c20] border-b-2 border-[#2b1c20] pb-0.5 hover:opacity-70 transition-opacity"
+              >
                 Voir le service
               </a>
             </motion.div>
@@ -1091,7 +1103,12 @@ export default function App() {
               <p className="font-sans text-[#2b1c20]/70 text-[16px] leading-relaxed mb-6 flex-grow">
                 Des visuels et vidéos ads conçus pour TikTok et Meta. Formats natifs, hooks puissants, UGC-style — optimisés pour le scroll et la conversion.
               </p>
-              <a href="#" className="w-max font-sans font-bold text-[15px] text-[#2b1c20] border-b-2 border-[#2b1c20] pb-0.5 hover:opacity-70 transition-opacity">
+              <a 
+                href={WHATSAPP_URL} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-max font-sans font-bold text-[15px] text-[#2b1c20] border-b-2 border-[#2b1c20] pb-0.5 hover:opacity-70 transition-opacity"
+              >
                 Voir le service
               </a>
             </motion.div>
@@ -1247,7 +1264,7 @@ export default function App() {
           </h2>
           <div className="flex flex-row flex-wrap items-center gap-4 w-full px-4 justify-center">
             <a 
-              href="https://wa.me/message/SGQCQZA5J56EE1" 
+              href={WHATSAPP_URL} 
               target="_blank" 
               rel="noopener noreferrer"
               className="w-auto px-6 md:px-10 py-4 bg-white text-[#46004e] rounded-[1.25rem] font-sans font-bold text-[14px] md:text-[15px] shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_4px_25px_rgba(0,0,0,0.08)] transition-all"
@@ -1355,7 +1372,7 @@ export default function App() {
         <div className="mt-12 md:mt-16 text-center flex flex-col sm:flex-row items-center justify-center gap-2 font-sans text-[15px] text-[#2b1c20]/65">
           <span>Vous avez d'autres questions ?</span>
           <a
-            href="https://wa.me/message/SGQCQZA5J56EE1"
+            href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 font-semibold text-[#46004e] hover:text-[#d20090] underline underline-offset-4 decoration-[#46004e]/30 hover:decoration-[#d20090] transition-colors"
